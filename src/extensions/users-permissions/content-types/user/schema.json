@@ -80,6 +80,12 @@
     "address": {
       "type": "string",
       "required": true
+    },
+    "verification_code": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::verification-code.verification-code",
+      "mappedBy": "user"
     }
   }
 }
