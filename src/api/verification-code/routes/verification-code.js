@@ -18,10 +18,10 @@ module.exports = {
         middlewares: [],
       },
     },
-    // {
-    //   method: "POST",
-    //   path: "/reset-password",
-    //   handler: "verification-code.resetPassword",
-    // },
+    {
+      method: "POST",
+      path: "/reset-password",
+      handler: "verification-code.resetPassword",
+    },
   ],
 };

@@ -23,8 +23,6 @@ module.exports = {
       return ctx.throw(400, "User not found");
     }
 
-    console.log(user);
-
     const resetCode = Math.floor(1000 + Math.random() * 9000).toString();
 
     const verificationCodes = await strapi.db
