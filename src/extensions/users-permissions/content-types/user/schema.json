@@ -91,7 +91,7 @@
     },
         "child_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "verification_code": {
       "type": "relation",
