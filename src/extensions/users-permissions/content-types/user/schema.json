@@ -81,6 +81,18 @@
       "type": "string",
       "required": true
     },
+        "profile_picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+        "child_name": {
+      "type": "string",
+      "required": true
+    },
     "verification_code": {
       "type": "relation",
       "relation": "oneToOne",
