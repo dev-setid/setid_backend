@@ -81,7 +81,7 @@
       "type": "string",
       "required": true
     },
-        "profile_picture": {
+    "profile_picture": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -89,7 +89,7 @@
         "images"
       ]
     },
-        "child_name": {
+    "child_name": {
       "type": "string",
       "required": false
     },
@@ -97,6 +97,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::verification-code.verification-code",
+      "mappedBy": "user"
+    },
+    "children": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::child.child",
       "mappedBy": "user"
     }
   }
