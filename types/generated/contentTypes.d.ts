@@ -362,6 +362,41 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiChildChild extends Schema.CollectionType {
+  collectionName: 'children';
+  info: {
+    singularName: 'child';
+    pluralName: 'children';
+    displayName: 'Child';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    child_name: Attribute.String;
+    user: Attribute.Relation<
+      'api::child.child',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::child.child',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::child.child',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiVerificationCodeVerificationCode
   extends Schema.CollectionType {
   collectionName: 'verification_codes';
@@ -704,10 +739,17 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     last_name: Attribute.String & Attribute.Required;
     payment_info: Attribute.String & Attribute.Required;
     address: Attribute.String & Attribute.Required;
+    profile_picture: Attribute.Media;
+    child_name: Attribute.String;
     verification_code: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
       'api::verification-code.verification-code'
+    >;
+    children: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::child.child'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -736,6 +778,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::child.child': ApiChildChild;
       'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
