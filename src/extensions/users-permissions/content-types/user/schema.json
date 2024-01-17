@@ -104,6 +104,9 @@
       "relation": "oneToMany",
       "target": "api::child.child",
       "mappedBy": "user"
+    },
+    "threadId": {
+      "type": "string"
     }
   }
 }
