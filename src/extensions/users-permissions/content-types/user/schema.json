@@ -75,24 +75,19 @@
     },
     "payment_info": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "address": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "profile_picture": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
-    "child_name": {
-      "type": "string",
-      "required": false
-    },
+
     "verification_code": {
       "type": "relation",
       "relation": "oneToOne",

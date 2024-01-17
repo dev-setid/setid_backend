@@ -737,10 +737,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     first_name: Attribute.String & Attribute.Required;
     last_name: Attribute.String & Attribute.Required;
-    payment_info: Attribute.String & Attribute.Required;
-    address: Attribute.String & Attribute.Required;
+    payment_info: Attribute.String;
+    address: Attribute.String;
     profile_picture: Attribute.Media;
-    child_name: Attribute.String;
     verification_code: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
