@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invitations",
+  "info": {
+    "singularName": "invitation",
+    "pluralName": "invitations",
+    "displayName": "invitation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "inviter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "invitee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "date_sent": {
+      "type": "date"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "invitee_email": {
+      "type": "string"
+    },
+    "invitee_name": {
+      "type": "string"
+    }
+  }
+}

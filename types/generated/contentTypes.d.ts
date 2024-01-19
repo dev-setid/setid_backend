@@ -397,6 +397,50 @@ export interface ApiChildChild extends Schema.CollectionType {
   };
 }
 
+export interface ApiInvitationInvitation extends Schema.CollectionType {
+  collectionName: 'invitations';
+  info: {
+    singularName: 'invitation';
+    pluralName: 'invitations';
+    displayName: 'invitation';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    inviter: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    invitee: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    date_sent: Attribute.Date;
+    status: Attribute.Boolean;
+    invitee_email: Attribute.String;
+    invitee_name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiVerificationCodeVerificationCode
   extends Schema.CollectionType {
   collectionName: 'verification_codes';
@@ -779,6 +823,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::child.child': ApiChildChild;
+      'api::invitation.invitation': ApiInvitationInvitation;
       'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
