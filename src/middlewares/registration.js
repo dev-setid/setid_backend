@@ -8,10 +8,11 @@ module.exports = () => {
       ctx.request.url === "/api/auth/local/register" &&
       ctx.response.status === 200
     ) {
+      const { email, invitation_id } = ctx.request.body;
       const userArray = await strapi.entityService.findMany(
         "plugin::users-permissions.user",
         {
-          filters: { email: ctx.request.body.email },
+          filters: { email },
         }
       );
       const user = userArray[0];
@@ -35,6 +36,20 @@ module.exports = () => {
           },
         }
       );
+
+      if (invitation_id) {
+        const invite = await strapi.entityService.update(
+          "api::invitation.invitation",
+          invitation_id,
+          {
+            data: {
+              invitee: user.id,
+              status: true,
+            },
+          }
+        );
+        console.log(invite);
+      }
     }
   };
 };
