@@ -362,126 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiChildChild extends Schema.CollectionType {
-  collectionName: 'children';
-  info: {
-    singularName: 'child';
-    pluralName: 'children';
-    displayName: 'Child';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    child_name: Attribute.String;
-    user: Attribute.Relation<
-      'api::child.child',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::child.child',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::child.child',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiInvitationInvitation extends Schema.CollectionType {
-  collectionName: 'invitations';
-  info: {
-    singularName: 'invitation';
-    pluralName: 'invitations';
-    displayName: 'invitation';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    inviter: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    invitee: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    date_sent: Attribute.Date;
-    status: Attribute.Boolean;
-    invitee_email: Attribute.String;
-    invitee_name: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::invitation.invitation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiVerificationCodeVerificationCode
-  extends Schema.CollectionType {
-  collectionName: 'verification_codes';
-  info: {
-    singularName: 'verification-code';
-    pluralName: 'verification-codes';
-    displayName: 'verification-code';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    user: Attribute.Relation<
-      'api::verification-code.verification-code',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    code: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 4;
-      }>;
-    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::verification-code.verification-code',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::verification-code.verification-code',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -794,7 +674,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::child.child'
     >;
-    threadId: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -812,6 +691,161 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiChildChild extends Schema.CollectionType {
+  collectionName: 'children';
+  info: {
+    singularName: 'child';
+    pluralName: 'children';
+    displayName: 'Child';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    child_name: Attribute.String;
+    user: Attribute.Relation<
+      'api::child.child',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::child.child',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::child.child',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiInvitationInvitation extends Schema.CollectionType {
+  collectionName: 'invitations';
+  info: {
+    singularName: 'invitation';
+    pluralName: 'invitations';
+    displayName: 'invitation';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    inviter: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    invitee: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    date_sent: Attribute.Date;
+    status: Attribute.Boolean;
+    invitee_email: Attribute.String;
+    invitee_name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiThreadThread extends Schema.CollectionType {
+  collectionName: 'threads';
+  info: {
+    singularName: 'thread';
+    pluralName: 'threads';
+    displayName: 'thread';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    threadId: Attribute.String;
+    user: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::thread.thread',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVerificationCodeVerificationCode
+  extends Schema.CollectionType {
+  collectionName: 'verification_codes';
+  info: {
+    singularName: 'verification-code';
+    pluralName: 'verification-codes';
+    displayName: 'verification-code';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::verification-code.verification-code',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    code: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 4;
+      }>;
+    status: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::verification-code.verification-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::verification-code.verification-code',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -822,15 +856,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::child.child': ApiChildChild;
-      'api::invitation.invitation': ApiInvitationInvitation;
-      'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::child.child': ApiChildChild;
+      'api::invitation.invitation': ApiInvitationInvitation;
+      'api::thread.thread': ApiThreadThread;
+      'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
     }
   }
 }
