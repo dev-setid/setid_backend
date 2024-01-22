@@ -4,8 +4,6 @@ module.exports = () => {
   return async (ctx, next) => {
     await next();
 
-    console.log(ctx.request.body);
-
     if (
       ctx.request.url === "/api/auth/local/register" &&
       ctx.response.status === 200
