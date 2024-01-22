@@ -12,7 +12,7 @@ module.exports = {
         from: "SetId <devsetid@gmail.com>",
         subject: "SetId Mediation Invitation",
         html: `<p>Hello ${invitee_name},</p>
-               <p>Invited you to SetId Mediation. Click the link below to get started:</p>
+               <p>${createdBy?.firstname} ${createdBy?.lastname} has invited you to SetId Mediation. Click the link below to get started:</p>
                <p><a href="http://localhost:3000/get-started?invited_by=${encodeURIComponent(createdBy?.firstname + ' ' + createdBy?.lastname)}&id=${createdBy?.id}&invitation_id=${id}">http://localhost:3000/get-started?invited_by=${encodeURIComponent(createdBy?.firstname + ' ' + createdBy?.lastname)}&id=${createdBy?.id}&invitation_id=${id}</a></p>`
       });      
 
