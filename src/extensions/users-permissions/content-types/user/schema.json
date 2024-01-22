@@ -85,9 +85,10 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
-
     "verification_code": {
       "type": "relation",
       "relation": "oneToOne",
@@ -99,9 +100,6 @@
       "relation": "oneToMany",
       "target": "api::child.child",
       "mappedBy": "user"
-    },
-    "threadId": {
-      "type": "string"
     }
   }
 }
