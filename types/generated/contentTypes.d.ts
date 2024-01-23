@@ -776,6 +776,7 @@ export interface ApiThreadThread extends Schema.CollectionType {
     singularName: 'thread';
     pluralName: 'threads';
     displayName: 'thread';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -787,6 +788,7 @@ export interface ApiThreadThread extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    status: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

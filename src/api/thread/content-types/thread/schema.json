@@ -4,7 +4,8 @@
   "info": {
     "singularName": "thread",
     "pluralName": "threads",
-    "displayName": "thread"
+    "displayName": "thread",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,6 +19,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "status": {
+      "type": "boolean"
     }
   }
 }
