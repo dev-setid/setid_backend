@@ -674,6 +674,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::child.child'
     >;
+    case: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'api::case.case'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -687,6 +692,33 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCaseCase extends Schema.CollectionType {
+  collectionName: 'cases';
+  info: {
+    singularName: 'case';
+    pluralName: 'cases';
+    displayName: 'Case';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    parents: Attribute.Relation<
+      'api::case.case',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    title: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::case.case', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::case.case', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -763,6 +795,81 @@ export interface ApiInvitationInvitation extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::invitation.invitation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiParentMediatorChatParentMediatorChat
+  extends Schema.CollectionType {
+  collectionName: 'parent_mediator_chats';
+  info: {
+    singularName: 'parent-mediator-chat';
+    pluralName: 'parent-mediator-chats';
+    displayName: 'Parent mediator chat';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    mediator: Attribute.Relation<
+      'api::parent-mediator-chat.parent-mediator-chat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    parent: Attribute.Relation<
+      'api::parent-mediator-chat.parent-mediator-chat',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::parent-mediator-chat.parent-mediator-chat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::parent-mediator-chat.parent-mediator-chat',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiParentMediatorMessageParentMediatorMessage
+  extends Schema.CollectionType {
+  collectionName: 'parent_mediator_messages';
+  info: {
+    singularName: 'parent-mediator-message';
+    pluralName: 'parent-mediator-messages';
+    displayName: 'Parent mediator message';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    send_id: Attribute.String & Attribute.Required;
+    chat_id: Attribute.String & Attribute.Required;
+    message: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::parent-mediator-message.parent-mediator-message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::parent-mediator-message.parent-mediator-message',
       'oneToOne',
       'admin::user'
     > &
@@ -864,8 +971,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::case.case': ApiCaseCase;
       'api::child.child': ApiChildChild;
       'api::invitation.invitation': ApiInvitationInvitation;
+      'api::parent-mediator-chat.parent-mediator-chat': ApiParentMediatorChatParentMediatorChat;
+      'api::parent-mediator-message.parent-mediator-message': ApiParentMediatorMessageParentMediatorMessage;
       'api::thread.thread': ApiThreadThread;
       'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
     }

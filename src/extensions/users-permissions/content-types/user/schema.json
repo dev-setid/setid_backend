@@ -100,6 +100,12 @@
       "relation": "oneToMany",
       "target": "api::child.child",
       "mappedBy": "user"
+    },
+    "case": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::case.case",
+      "inversedBy": "parents"
     }
   }
 }
