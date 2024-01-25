@@ -44,6 +44,7 @@ module.exports = () => {
           data: {
             title: `${last_name} Family`,
             parents: [user.id],
+            publishedAt: new Date().getTime(),
           },
         });
       }
