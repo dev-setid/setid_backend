@@ -679,6 +679,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'api::case.case'
     >;
+    conversation: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToOne',
+      'api::conversation.conversation'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -758,6 +763,81 @@ export interface ApiChildChild extends Schema.CollectionType {
   };
 }
 
+export interface ApiConversationConversation extends Schema.CollectionType {
+  collectionName: 'conversations';
+  info: {
+    singularName: 'conversation';
+    pluralName: 'conversations';
+    displayName: 'Conversation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::conversation.conversation',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::conversation.conversation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::conversation.conversation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiConversationMessageConversationMessage
+  extends Schema.CollectionType {
+  collectionName: 'conversation_messages';
+  info: {
+    singularName: 'conversation-message';
+    pluralName: 'conversation-messages';
+    displayName: 'Conversation Message';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    conversation: Attribute.Relation<
+      'api::conversation-message.conversation-message',
+      'oneToOne',
+      'api::conversation.conversation'
+    >;
+    sender: Attribute.Relation<
+      'api::conversation-message.conversation-message',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    message: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::conversation-message.conversation-message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::conversation-message.conversation-message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiInvitationInvitation extends Schema.CollectionType {
   collectionName: 'invitations';
   info: {
@@ -795,81 +875,6 @@ export interface ApiInvitationInvitation extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::invitation.invitation',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiParentMediatorChatParentMediatorChat
-  extends Schema.CollectionType {
-  collectionName: 'parent_mediator_chats';
-  info: {
-    singularName: 'parent-mediator-chat';
-    pluralName: 'parent-mediator-chats';
-    displayName: 'Parent mediator chat';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    mediator: Attribute.Relation<
-      'api::parent-mediator-chat.parent-mediator-chat',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    parent: Attribute.Relation<
-      'api::parent-mediator-chat.parent-mediator-chat',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::parent-mediator-chat.parent-mediator-chat',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::parent-mediator-chat.parent-mediator-chat',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiParentMediatorMessageParentMediatorMessage
-  extends Schema.CollectionType {
-  collectionName: 'parent_mediator_messages';
-  info: {
-    singularName: 'parent-mediator-message';
-    pluralName: 'parent-mediator-messages';
-    displayName: 'Parent mediator message';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    send_id: Attribute.String & Attribute.Required;
-    chat_id: Attribute.String & Attribute.Required;
-    message: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::parent-mediator-message.parent-mediator-message',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::parent-mediator-message.parent-mediator-message',
       'oneToOne',
       'admin::user'
     > &
@@ -973,9 +978,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::case.case': ApiCaseCase;
       'api::child.child': ApiChildChild;
+      'api::conversation.conversation': ApiConversationConversation;
+      'api::conversation-message.conversation-message': ApiConversationMessageConversationMessage;
       'api::invitation.invitation': ApiInvitationInvitation;
-      'api::parent-mediator-chat.parent-mediator-chat': ApiParentMediatorChatParentMediatorChat;
-      'api::parent-mediator-message.parent-mediator-message': ApiParentMediatorMessageParentMediatorMessage;
       'api::thread.thread': ApiThreadThread;
       'api::verification-code.verification-code': ApiVerificationCodeVerificationCode;
     }
