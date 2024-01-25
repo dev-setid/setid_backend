@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "conversation_messages",
+  "info": {
+    "singularName": "conversation-message",
+    "pluralName": "conversation-messages",
+    "displayName": "Conversation Message"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "conversation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::conversation.conversation"
+    },
+    "sender": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

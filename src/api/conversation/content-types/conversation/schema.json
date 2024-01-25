@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "conversations",
+  "info": {
+    "singularName": "conversation",
+    "pluralName": "conversations",
+    "displayName": "Conversation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "conversation"
+    }
+  }
+}

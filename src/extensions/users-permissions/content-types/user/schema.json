@@ -106,6 +106,12 @@
       "relation": "manyToOne",
       "target": "api::case.case",
       "inversedBy": "parents"
+    },
+    "conversation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::conversation.conversation",
+      "inversedBy": "user"
     }
   }
 }
